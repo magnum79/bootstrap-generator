@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateproductRequest;
 use App\Http\Requests\UpdateproductRequest;
+use App\Repositories\categoryRepository;
 use App\Repositories\productRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -14,10 +15,14 @@ use Response;
 class productController extends AppBaseController
 {
     /** @var  productRepository */
+    private $categoryRepository;
+
+    /** @var  productRepository */
     private $productRepository;
 
-    public function __construct(productRepository $productRepo)
+    public function __construct(categoryRepository $categoryRepo, productRepository $productRepo)
     {
+        $this->categoryRepository = $categoryRepo;
         $this->productRepository = $productRepo;
     }
 
@@ -30,7 +35,12 @@ class productController extends AppBaseController
     public function index(Request $request)
     {
         $this->productRepository->pushCriteria(new RequestCriteria($request));
+        $categories = $this->categoryRepository->all();
         $products = $this->productRepository->all();
+
+        foreach ($products as $key => $value) {
+            $products[$key]["category"] = $categories[$value->category_id - 1]["name"];
+        }
 
         return view('products.index')
             ->with('products', $products);
@@ -43,7 +53,8 @@ class productController extends AppBaseController
      */
     public function create()
     {
-        return view('products.create');
+        return view('products.create')
+            ->with('categories', $this->enumerateCategories());
     }
 
     /**
@@ -101,7 +112,8 @@ class productController extends AppBaseController
             return redirect(route('products.index'));
         }
 
-        return view('products.edit')->with('product', $product);
+        return view('products.edit')->with('product', $product)
+            ->with('categories', $this->enumerateCategories());;
     }
 
     /**
@@ -152,4 +164,22 @@ class productController extends AppBaseController
 
         return redirect(route('products.index'));
     }
+
+    /**
+     * Make simple categories array
+     *
+     * @return categoriesList
+     */
+    private function enumerateCategories()
+    {
+        $categories = $this->categoryRepository->all();
+
+        $categoriesList = [];
+        foreach ($categories as $key => $item) {
+            $categoriesList[$key+1] = $item->name;
+        }
+
+        return $categoriesList;
+    }
+
 }

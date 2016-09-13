@@ -3,7 +3,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Category Id</th>
+        <th>Category</th>
         <th>Created At</th>
         <th>Updated At</th>
         <th colspan="3">Action</th>
@@ -14,7 +14,7 @@
             <td>{!! $product->name !!}</td>
             <td>{!! $product->description !!}</td>
             <td>{!! $product->price !!}</td>
-            <td>{!! $product->category_id !!}</td>
+            <td>{!! $product->category !!}</td>
             <td>{!! $product->created_at !!}</td>
             <td>{!! $product->updated_at !!}</td>
             <td>
