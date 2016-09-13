@@ -164,6 +164,10 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * JavaScript validation
+         */
+        Proengsoft\JsValidation\JsValidationServiceProvider::class,
 
     ],
 
@@ -212,7 +216,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'Flash'     => Laracasts\Flash\Flash::class
+        'Flash'     => Laracasts\Flash\Flash::class,
+        'JsValidator' => Proengsoft\JsValidation\Facades\JsValidatorFacade::class
     ],
 
 ];

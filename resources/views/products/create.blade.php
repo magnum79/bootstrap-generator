@@ -15,5 +15,6 @@
             @include('products.fields')
 
         {!! Form::close() !!}
+        {!! JsValidator::formRequest('App\Http\Requests\CreateproductRequest') !!}
     </div>
 @endsection

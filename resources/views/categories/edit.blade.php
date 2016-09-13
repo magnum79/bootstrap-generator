@@ -15,5 +15,6 @@
             @include('categories.fields')
 
             {!! Form::close() !!}
+            {!! JsValidator::formRequest('App\Http\Requests\UpdatecategoryRequest') !!}
         </div>
 @endsection
