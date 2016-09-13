@@ -11,3 +11,8 @@
 
 
 
+
+
+Route::resource('categories', 'categoryAPIController');
+
+Route::resource('products', 'productAPIController');

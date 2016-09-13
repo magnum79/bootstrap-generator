@@ -32,3 +32,7 @@ Route::group(['prefix' => 'api', 'namespace' => 'API'], function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::resource('categories', 'categoryController');
+
+Route::resource('products', 'productController');
