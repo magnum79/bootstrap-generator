@@ -87,8 +87,8 @@ class product extends Model
      */
     public static $rules = [
         'name' => 'required',
-        'description' => 'min:5',
-        'price' => 'numeric',
+        'description' => 'required|min:5',
+        'price' => 'required|numeric',
         'category_id' => 'required'
     ];
 
